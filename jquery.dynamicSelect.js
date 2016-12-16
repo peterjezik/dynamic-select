@@ -99,7 +99,9 @@
         },
 
         calculateSubstructure: function(level){
-            if (level == 0) {return this.structure}
+            if (level === 0) {
+                return this.structure;
+            }
             else{
                 var substructure = this.structure;
                 for (var i = 0; i < level; i++) {
