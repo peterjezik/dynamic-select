@@ -58,13 +58,13 @@
             for (var i = 0; i < this.selectors.length - 1; i++) {
                 var selector = this.selectors[i];
                 $(this.context).on("change", selector, {"level": i, "plugin": this}, function(event){
-                                        var val = $("option:selected", $(this)).text();
-                                        var level = event.data.level;
-                                        var plugin = event.data.plugin;
-                                        var substructure = plugin.calculateSubstructure(level);
-                                        plugin.populateSelect(substructure, level, val);
-                                        plugin.disableNextSelects(level);
-                                   });
+                    var val = $("option:selected", $(this)).text();
+                    var level = event.data.level;
+                    var plugin = event.data.plugin;
+                    var substructure = plugin.calculateSubstructure(level);
+                    plugin.populateSelect(substructure, level, val);
+                    plugin.disableNextSelects(level);
+               });
             }
         },
 
@@ -117,9 +117,9 @@
             for (var i = level + 2; i <= this.selectors.length; i++) {
                 var selector = this.selectors[i];
                 $(selector, this.context).prop("disabled", "disabled")
-                                    .removeClass("dynamic-select-enabled dynamic-select-active")
-                                    .html("<option class='dynamic-select-option' value=" + this.noSelectValue +">" + this.captions[i] + "</option>");
-            };
+                    .removeClass("dynamic-select-enabled dynamic-select-active")
+                    .html("<option class='dynamic-select-option' value=" + this.noSelectValue +">" + this.captions[i] + "</option>");
+            }
         },
 
         createKeysMethodIfNecessary: function(){
