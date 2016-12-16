@@ -39,6 +39,7 @@
         this.captions = this.options.captions;
         this.noSelectValue = this.options.noSelectValue;
         this.existingOptionValues = this.options.optionValues;
+        this.hideNext = this.options.hideNext;
         this.context = this.element;
 
         this.createKeysMethodIfNecessary();
@@ -102,6 +103,9 @@
             $(nextSelect, this.context).html(options)
                                    .addClass("dynamic-select-active dynamic-select-enabled")
                                    .removeAttr("disabled");
+            if (this.hideNext) {
+                $(nextSelect, this.context).show();
+            }
         },
 
         calculateSubstructure: function(level){
@@ -127,6 +131,9 @@
                 $(selector, this.context).prop("disabled", "disabled")
                     .removeClass("dynamic-select-enabled dynamic-select-active")
                     .html("<option class='dynamic-select-option' value=" + this.noSelectValue +">" + this.captions[i] + "</option>");
+                if (this.hideNext) {
+                    $(selector, this.context).hide();
+                }
             }
         },
 
