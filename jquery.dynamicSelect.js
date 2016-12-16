@@ -86,7 +86,7 @@
             var optionsToPopulate = $.isArray(optionsObject) ? optionsObject : Object.keys(substructure[optionValue]);
 
             var options = "<option class='dynamic-select-option' value=" + this.noSelectValue +">" + this.captions[level+1] + "</option>";
-            for (key in optionsToPopulate){
+            for (var key in optionsToPopulate){
                 var optionText = optionsToPopulate[key];
                 var optionValue = this.getOptionValue(optionText);
                 options += "<option class='dynamic-select-option' value='" + optionValue + "'>" + optionText + "</option>";
