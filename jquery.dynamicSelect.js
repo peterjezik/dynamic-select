@@ -85,6 +85,12 @@
 
             var optionsToPopulate = $.isArray(optionsObject) ? optionsObject : Object.keys(substructure[optionValue]);
 
+            // skip rendering next select-box if there are no options for it
+            if (0 === optionsToPopulate.length) {
+                this.disableNextSelects(level - 1);
+                return false;
+            }
+
             var options = "<option class='dynamic-select-option' value=" + this.noSelectValue +">" + this.captions[level+1] + "</option>";
             for (var key in optionsToPopulate){
                 var optionText = optionsToPopulate[key];
