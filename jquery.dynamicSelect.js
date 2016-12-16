@@ -49,9 +49,9 @@
     }
 
     Plugin.prototype = {
-        
+
         init: function() {
-            
+
             this.populateSelect({true: this.structure}, -1, true);
             this.disableNextSelects(-1);
 
@@ -67,7 +67,7 @@
                                    });
             }
         },
-        
+
         getOptionValue: function(key){
             return (key in this.existingOptionValues) ? this.existingOptionValues[key] : key;
         },
@@ -108,8 +108,8 @@
                     substructure = substructure[mainValue];
                 }
 
-                return substructure;    
-                
+                return substructure;
+
             }
         },
 
@@ -144,7 +144,7 @@
                 var numOfSelects = $("select", this.context).length;
                 var selectors = new Array(numOfSelects);
                 for (var i = 0; i < numOfSelects; i++) {
-                    selectors[i] = "select:eq(" + i + ")";                
+                    selectors[i] = "select:eq(" + i + ")";
                 }
                 return selectors;
             }
@@ -165,7 +165,7 @@
             else{
                 return this.captions;
             }
-        }        
+        }
     };
 
     // A really lightweight plugin wrapper around the constructor,
