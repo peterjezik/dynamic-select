@@ -59,7 +59,7 @@
 
             for (var i = 0; i < this.selectors.length - 1; i++) {
                 var selector = this.selectors[i];
-                $(this.context).on("change", selector, {"level": i, "plugin": this}, function(event){
+                $(this.context).on("change", selector, {"level": i, "plugin": this}, function(event) {
                     var val = $("option:selected", $(this)).text();
                     var level = event.data.level;
                     var plugin = event.data.plugin;
@@ -70,11 +70,11 @@
             }
         },
 
-        getOptionValue: function(key){
+        getOptionValue: function( key ) {
             return (key in this.existingOptionValues) ? this.existingOptionValues[key] : key;
         },
 
-        populateSelect: function(substructure, level, optionValue) {
+        populateSelect: function( substructure, level, optionValue ) {
             if (optionValue === this.captions[level]) {
                 return false;
             }
@@ -95,7 +95,7 @@
             }
 
             var options = "<option class='dynamic-select-option' value=" + this.defaultSelectValue(level + 1) +">" + this.captions[level+1] + "</option>";
-            for (var key in optionsToPopulate){
+            for (var key in optionsToPopulate) {
                 var optionText = optionsToPopulate[key];
                 optionValue = this.getOptionValue(optionText);
                 options += "<option class='dynamic-select-option' value='" + optionValue + "'>" + optionText + "</option>";
@@ -103,18 +103,17 @@
 
             $(currentSelect, this.context).removeClass("dynamic-select-active");
             $(nextSelect, this.context).html(options)
-                                   .addClass("dynamic-select-active dynamic-select-enabled")
-                                   .removeAttr("disabled");
+                .addClass("dynamic-select-active dynamic-select-enabled")
+                .removeAttr("disabled");
             if (this.hideNext) {
                 $(nextSelect, this.context).show();
             }
         },
 
-        calculateSubstructure: function(level){
+        calculateSubstructure: function( level ) {
             if (level === 0) {
                 return this.structure;
-            }
-            else{
+            } else {
                 var substructure = this.structure;
                 for (var i = 0; i < level; i++) {
                     var mainSelector = this.selectors[i];
@@ -123,14 +122,12 @@
                 }
 
                 return substructure;
-
             }
         },
 
-        disableNextSelects: function(level){
+        disableNextSelects: function( level ) {
             for (var i = level + 2; i <= this.selectors.length; i++) {
                 var selector = this.selectors[i];
-
 
                 $(selector, this.context).prop("disabled", "disabled")
                     .removeClass("dynamic-select-enabled dynamic-select-active")
@@ -141,7 +138,7 @@
             }
         },
 
-        defaultSelectValue: function(level) {
+        defaultSelectValue: function( level ) {
             var result = this.noSelectValue;
             // use previous select-box value as current select-box default value
             if (this.previousDefaultValue) {
@@ -151,7 +148,7 @@
             return result;
         },
 
-        createKeysMethodIfNecessary: function(){
+        createKeysMethodIfNecessary: function() {
             if (typeof Object.keys !== "function") {
                 (function() {
                     Object.keys = Object_keys;
@@ -168,7 +165,7 @@
             }
         },
 
-        createSelectorsIfNecessary: function(){
+        createSelectorsIfNecessary: function() {
             if (typeof this.selectors === "undefined") {
                 var numOfSelects = $("select", this.context).length;
                 var selectors = new Array(numOfSelects);
@@ -176,13 +173,12 @@
                     selectors[i] = "select:eq(" + i + ")";
                 }
                 return selectors;
-            }
-            else{
+            } else {
                 return this.selectors;
             }
         },
 
-        createCaptionsIfNecessary: function(){
+        createCaptionsIfNecessary: function() {
             if (typeof this.captions === "undefined") {
                 var numOfSelects = this.selectors.length;
                 var captions = new Array(numOfSelects);
@@ -190,8 +186,7 @@
                     captions[i] = "&nbsp;";
                 }
                 return captions;
-            }
-            else{
+            } else {
                 return this.captions;
             }
         }
