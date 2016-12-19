@@ -82,6 +82,7 @@
             var nextSelect = this.selectors[level + 1];
             var optionsObject = substructure[optionValue];
             if (typeof optionsObject === "undefined") {
+                this.disableNextSelects(level - 1);
                 return false;
             }
 
