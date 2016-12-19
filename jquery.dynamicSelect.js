@@ -38,6 +38,7 @@
         this.structure = this.options.structure;
         this.captions = this.options.captions;
         this.noSelectValue = this.options.noSelectValue;
+        this.previousDefaultValue = this.options.previousDefaultValue;
         this.existingOptionValues = this.options.optionValues;
         this.hideNext = this.options.hideNext;
         this.context = this.element;
@@ -92,7 +93,7 @@
                 return false;
             }
 
-            var options = "<option class='dynamic-select-option' value=" + this.noSelectValue +">" + this.captions[level+1] + "</option>";
+            var options = "<option class='dynamic-select-option' value=" + this.defaultSelectValue(level + 1) +">" + this.captions[level+1] + "</option>";
             for (var key in optionsToPopulate){
                 var optionText = optionsToPopulate[key];
                 optionValue = this.getOptionValue(optionText);
@@ -128,13 +129,25 @@
         disableNextSelects: function(level){
             for (var i = level + 2; i <= this.selectors.length; i++) {
                 var selector = this.selectors[i];
+
+
                 $(selector, this.context).prop("disabled", "disabled")
                     .removeClass("dynamic-select-enabled dynamic-select-active")
-                    .html("<option class='dynamic-select-option' value=" + this.noSelectValue +">" + this.captions[i] + "</option>");
+                    .html("<option class='dynamic-select-option' value=" + this.defaultSelectValue(level) + ">" + this.captions[i] + "</option>");
                 if (this.hideNext) {
                     $(selector, this.context).hide();
                 }
             }
+        },
+
+        defaultSelectValue: function(level) {
+            var result = this.noSelectValue;
+            // use previous select-box value as current select-box default value
+            if (this.previousDefaultValue) {
+                result = $(this.selectors[level - 1], this.context).val();
+            }
+
+            return result;
         },
 
         createKeysMethodIfNecessary: function(){
